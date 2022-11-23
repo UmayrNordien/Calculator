@@ -17,10 +17,15 @@ body{
 
 }
 
+html, body {
+    min-height: 100%;
+}
+
+
 /* CONTAINER (BUTTONS) */
 .container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     height:260px;
     width: 250px;
@@ -47,17 +52,17 @@ you want to apply to the element in brackets */
 /* BUTTON */
 button{
     border:none;
-    background-color: rgb(148, 137, 216);
+    background-color: transparent;
     /* opacity: 75%; */
-    color: white;
+    color: rgb(255, 255, 255);
 }
 button:hover{
-    background-color:  rgba(238,174,202,1);
+    background-color:   rgba(148, 137, 216,50); 
 }
 #screen{
     border:none;
     grid-column: 1 / -1;
-    background-color: rgb(126, 217, 140);
+    background-color:rgba(255, 255, 255,100);
 }
 
 /* ERASE */
@@ -65,13 +70,13 @@ button:hover{
     background-color: rgb(126, 217, 140);
 }
 #erase:hover{
-    background-color: rgb(184, 184, 184);
+    background-color:  rgb(148, 137, 216);
 }
 
 /* ERASE */
 #equal{
-    background-color:  rgba(238,174,202,1);
+    background-color:  rgb(148, 137, 216);
 }
 #equal:hover{
-    background-color: rgb(184, 184, 184);
+    background-color: rgb(126, 217, 140);
 }

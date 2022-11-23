@@ -164,3 +164,8 @@ division.addEventListener("click", function(e) {
     }
 });
 
+//SINGULAR DECIMAL?????
+// appendNumber(number) {
+//     if (number === '.' && this.currentOperand.includes('.')) return
+//     this.currentOperand = this.currentOperand.toString() + number.toString()
+//   }
