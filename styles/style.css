@@ -1,0 +1,77 @@
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+    cursor:cell;
+    font-family: 'Orbitron', sans-serif; /* google font */
+}
+
+/* BODY */
+body{
+    height: 250px;
+    width: 100vw;
+    /* gradient color */
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,187,1) 100%);
+
+}
+
+/* CONTAINER (BUTTONS) */
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    height:260px;
+    width: 250px;
+    
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+
+    border: 4px dashed rgb(157, 79, 147);
+    border-radius:0.4rem;
+}
+
+/* To style an ID selector in CSS, use # 
+followed by the ID of the element. 
+Then put the style properties 
+you want to apply to the element in brackets */
+
+/* EQUAL */
+#equal{
+    font-size: 22px;
+    grid-column: 2/ -1;
+}
+
+/* BUTTON */
+button{
+    border:none;
+    background-color: rgb(148, 137, 216);
+    /* opacity: 75%; */
+    color: white;
+}
+button:hover{
+    background-color:  rgba(238,174,202,1);
+}
+#screen{
+    border:none;
+    grid-column: 1 / -1;
+    background-color: rgb(126, 217, 140);
+}
+
+/* ERASE */
+#erase{
+    background-color: rgb(126, 217, 140);
+}
+#erase:hover{
+    background-color: rgb(184, 184, 184);
+}
+
+/* ERASE */
+#equal{
+    background-color:  rgba(238,174,202,1);
+}
+#equal:hover{
+    background-color: rgb(184, 184, 184);
+}
