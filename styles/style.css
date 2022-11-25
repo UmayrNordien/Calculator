@@ -7,6 +7,7 @@
     cursor:cell;
 }
 
+/* disable scroll */
 html, body {
     margin: 0;
     height: 100%;
@@ -84,41 +85,4 @@ body {
     font-size: 2.5rem;
 }
 
-/* RESPONSIVENESS */
-@media screen and (max-width: 425px) {
-    .body .html{
-
-    }
-    .calculator-grid > button {
-        font-size: 2rem;
-        border: none;
-        border-radius: 0;
-        margin:0;
-        padding:0;
-        background-color: transparent;
-        color:black;
-    }
-    .output{
-        margin:0;
-        padding:0;
-        border:none;
-        border-radius: none;
-        background-color: rgba(51, 59, 51, 0.75);
-        color:black;
-        display: flex;
-        align-items:center;  /* as the screen gets smaller, the numbers wont get cut out the side of the screen */
-        justify-content: space-around;
-        flex-direction: column;
-
-        word-wrap: break-word;
-        word-break: break-all;   
-    }
-
-    .calculator-grid > button:hover {
-        background-color: transparent;
-        border: none;
-        color:none;
-        transition: none;
-    }
-}
 
