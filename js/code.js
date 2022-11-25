@@ -1,171 +1,132 @@
-//VARIABLES
-/* variables declared before functions so that its a global variable that persists 
-its value through the function calls. 
-If you put it inside the function it will be always 0 when the function is called
-moving the variable out of the scope of the function.
-
-moving the variable out of the scope of the function.
-this will make the same variable accessible by other methods in the same scope*/
-
-//NUMBER VARIABLES
-let buttons = document.getElementById("equal");
-let screen = document.getElementById("screen");
-let firstNumber = document.getElementById("one");
-let secondNumber = document.getElementById("two");
-let dotNumber = document.getElementById("dot");
-let thirdNumber = document.getElementById("three");
-let fourthNumber = document.getElementById("four");
-let fifthNumber = document.getElementById("five");
-let sixthNumber = document.getElementById("six");
-let seventhNumber = document.getElementById("seven");
-let eightNumber = document.getElementById("eight");
-let ninthNumber = document.getElementById("nine");
-
-
-
-//OPERATOR VARIABLES
-let zeroNumber = document.getElementById("zero");
-let clear = document.getElementById("erase");
-let plus = document.getElementById("plus");
-let minus = document.getElementById("minus");
-let multiply = document.getElementById("multiply");
-let division = document.getElementById("division");
-
-
-
-// NUMBER BUTTONS
-// NUMBER 1 BUTTON
-
-firstNumber.addEventListener("click", function(e) {
-/* e is the short var reference for event object which will be passed to event handlers.
-The event object essentially has lot of interesting methods and properties that can be used in the event handlers.
-The click handler which is a MouseEvent
-The handle (e), is like a variable that allows you to interact with the object in this case being firstNumber */
-    let display = document.getElementById("one").innerText; //.innerText writing into an HTML element
-    screen.value += display;   //The addition assignment ( += ) operator adds the value of the right operand to a variable and assigns the result to the variable
-});
-
-// NUMBER 2 BUTTON
-secondNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("two").innerText;
-    screen.value += display;
-});
-
-// NUMBER 3 BUTTON
-thirdNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("three").innerText;
-    screen.value += display;
-});
-
-// NUMBER 4 BUTTON
-fourthNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("four").innerText;
-    screen.value += display;
-});
-
-// NUMBER 5 BUTTON
-fifthNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("five").innerText;
-    screen.value += display;
-});
-
-// NUMBER 6 BUTTON
-sixthNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("six").innerText;
-    screen.value += display;
-});
-
-// NUMBER 7 BUTTON
-seventhNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("seven").innerText;
-    screen.value += display;
-});
-
-// NUMBER 8 BUTTON
-eightNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("eight").innerText;
-    screen.value += display;
-});
-
-// NUMBER 9 BUTTON
-ninthNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("nine").innerText;
-    screen.value += display;
-});
-
-// ZERO BUTTON
-zeroNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("zero").innerText;
-    screen.value += display;
-});
-
-// DOT BUTTON
-dotNumber.addEventListener("click", function(e) {
-    let display = document.getElementById("dot").innerText;
-    screen.value += display;
-});
-
-
-
-//OPERATOR BUTTONS
-// EQUAL BUTTON
-buttons.addEventListener("click", function(e) {
-    let display = document.getElementById("equal").innerText;
-    if(display == "=" && screen.value == ""){
-        screen.value = 0;
+class Calculator {
+    constructor(previousOperandTextElement, currentOperandTextElement) {
+      this.previousOperandTextElement = previousOperandTextElement
+      this.currentOperandTextElement = currentOperandTextElement
+      this.clear()
     }
-    else{
-        screen.value = eval(screen.value);
+  
+    clear() {
+      this.currentOperand = ''
+      this.previousOperand = ''
+      this.operation = undefined
     }
-});
-
-// CLEAR BUTTON
-clear.addEventListener("click", function(e) {
-    let display = document.getElementById("erase");
-    screen.value = "";              //REPLACE WITH AN EMPTY STRING
-});
-
-plus.addEventListener("click", function(e) {
-    let display = document.getElementById("plus").innerText;
-    
-    if(screen.value == ""){
-        screen.value += "";
-        alert("Enter a number first");
+  
+    delete() {
+      this.currentOperand = this.currentOperand.toString().slice(0, -1)
     }
-    else{
-        screen.value += display;
+  
+    appendNumber(number) {
+      if (number === '.' && this.currentOperand.includes('.')) return
+      this.currentOperand = this.currentOperand.toString() + number.toString()
     }
-
-});
-// SUBTRACT BUTTON
-minus.addEventListener("click", function(e) {
-    let display = document.getElementById("minus").innerText;
-    screen.value += display;
-
-});
-// MULTIPLY BUTTON
-multiply.addEventListener("click", function(e) {
-    let display = document.getElementById("multiply").innerText;
-    if(screen.value == ""){
+  
+    chooseOperation(operation) {
+      if (this.currentOperand === '') return
+      if (this.previousOperand !== '') {
+        this.compute()
+      }
+      this.operation = operation
+      this.previousOperand = this.currentOperand
+      this.currentOperand = ''
     }
-    else{
-        screen.value += display;
+  //COMPUTATION
+    compute() {
+      let computation
+      const prev = parseFloat(this.previousOperand)
+      const current = parseFloat(this.currentOperand)
+      if (isNaN(prev) || isNaN(current)) return
+      switch (this.operation) {
+        /* The CASE expression goes through conditions and returns a value 
+        when the first condition is met (like an if-then-else statement). 
+        So, once a condition is true, it will stop reading and return the result. 
+        If no conditions are true, it returns the value in the ELSE clause */
+        case '+':                         
+          computation = prev + current
+          break
+        case '-':
+          computation = prev - current
+          break
+        case '*':
+          computation = prev * current
+          break
+        case '÷':
+          computation = prev / current
+          break
+        default:
+          return
+      }
+      this.currentOperand = computation
+      this.operation = undefined
+      this.previousOperand = ''
     }
-});
-// DIVISION BUTTON
-division.addEventListener("click", function(e) {
-    let display = document.getElementById("division").innerText;
-    if(screen.value == ""){
-        screen.value += "";
-        alert("Enter a number first");
+  
+    getDisplayNumber(number) {
+      const stringNumber = number.toString()
+      const integerDigits = parseFloat(stringNumber.split('.')[0])
+      const decimalDigits = stringNumber.split('.')[1]
+      let integerDisplay
+      if (isNaN(integerDigits)) {
+        integerDisplay = ''
+      } else {
+        integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+      }
+      if (decimalDigits != null) {
+        return `${integerDisplay}.${decimalDigits}`
+      } else {
+        return integerDisplay
+      }
     }
-    else{
-        screen.value += display;
+  
+    updateDisplay() {
+      this.currentOperandTextElement.innerText =
+        this.getDisplayNumber(this.currentOperand)
+      if (this.operation != null) {
+        this.previousOperandTextElement.innerText =
+          `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+      } else {
+        this.previousOperandTextElement.innerText = ''
+      }
     }
-});
-
-//SINGULAR DECIMAL?????
-// appendNumber(number) {
-//     if (number === '.' && this.currentOperand.includes('.')) return
-//     this.currentOperand = this.currentOperand.toString() + number.toString()
-//   }
+  }
+  
+  //VARIABLES
+  const numberButtons = document.querySelectorAll('[data-number]')
+  const operationButtons = document.querySelectorAll('[data-operation]')
+  const equalsButton = document.querySelector('[data-equals]')
+  const deleteButton = document.querySelector('[data-delete]')
+  const allClearButton = document.querySelector('[data-all-clear]')
+  const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+  const currentOperandTextElement = document.querySelector('[data-current-operand]')
+  
+  //CALCULATOR
+  const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
+  //NUMBERS BUTTON
+  numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      calculator.appendNumber(button.innerText)
+      calculator.updateDisplay()
+    })
+  })
+  //OPERATIONS BUTTON
+  operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      calculator.chooseOperation(button.innerText)
+      calculator.updateDisplay()
+    })
+  })
+  //EQUALS BUTTON
+  equalsButton.addEventListener('click', button => {
+    calculator.compute()
+    calculator.updateDisplay()
+  })
+  //ALL CLEAR BUTTON
+  allClearButton.addEventListener('click', button => {
+    calculator.clear()
+    calculator.updateDisplay()
+  })
+  
+  //DELETE BUTTON
+  deleteButton.addEventListener('click', button => {
+    calculator.delete()
+    calculator.updateDisplay()
+  })

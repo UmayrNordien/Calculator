@@ -1,82 +1,79 @@
-*,
-*::after,
-*::before{
+*, *::before, *::after {
     box-sizing: border-box;
-    padding:0;
-    margin:0;
+    font-family: Gotham Rounded, sans-serif;
+    font-weight: normal;
     cursor:cell;
-    font-family: 'Orbitron', sans-serif; /* google font */
-}
-
-/* BODY */
-body{
-    height: 250px;
-    width: 100vw;
-    /* gradient color */
-    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,187,1) 100%);
-
-}
-
-html, body {
-    min-height: 100%;
-}
-
-
-/* CONTAINER (BUTTONS) */
-.container{
+  }
+  
+  body {
+    padding: 0;
+    margin: 0;
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,187,1) 100%);  
+  }
+  
+  .calculator-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-
-    height:260px;
-    width: 250px;
-    
     justify-content: center;
-    margin: auto;
-    margin-top: 20px;
-
-    border: 4px dashed rgb(157, 79, 147);
-    border-radius:0.4rem;
-}
-
-/* To style an ID selector in CSS, use # 
-followed by the ID of the element. 
-Then put the style properties 
-you want to apply to the element in brackets */
-
-/* EQUAL */
-#equal{
-    font-size: 22px;
-    grid-column: 2/ -1;
-}
-
-/* BUTTON */
-button{
-    border:none;
-    background-color: transparent;
-    /* opacity: 75%; */
-    color: rgb(255, 255, 255);
-}
-button:hover{
-    background-color:   rgba(148, 137, 216,50); 
-}
-#screen{
-    border:none;
+    align-content: space-evenly; /* previously center */
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+  }
+  
+  /* BUTTONS */
+  .calculator-grid > button {
+    font-size: 2rem;
+    border:2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background-color: rgba(49, 49, 49, 0.75);
+    color:rgb(255, 255, 255);
+    margin:3px;
+    padding:2.5px;
+  }
+  /* BUTTON HOVER */
+  .calculator-grid > button:hover {
+    background-color: rgba(237, 237, 237, 0.9);
+    border: 2px solid rgb(0, 0, 0);
+    color:rgb(0, 0, 0);
+    transition: 1s;
+  }
+  
+  .span-two {
+    grid-column: span 2;
+  }
+  
+  .output {
     grid-column: 1 / -1;
-    background-color:rgba(255, 255, 255,100);
-}
+    background-color: rgba(82, 135, 82, 0.75);
+    border:2px solid rgb(255, 255, 255);
+    border-radius: 8px;
 
-/* ERASE */
-#erase{
-    background-color: rgb(126, 217, 140);
-}
-#erase:hover{
-    background-color:  rgb(148, 137, 216);
-}
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    margin:4px;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
 
-/* ERASE */
-#equal{
-    background-color:  rgb(148, 137, 216);
-}
-#equal:hover{
-    background-color: rgb(126, 217, 140);
-}
+  .output:hover{
+    background-color: rgba(49, 49, 49, 0.75);
+    border:2px solid rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    transition: 15s;
+  }
+  
+  .output .previous-operand {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem;
+  }
+  
+  .output .current-operand {
+    color: rgba(255, 255, 255,.75);
+    font-size: 2.5rem;
+  }
+
+
+
